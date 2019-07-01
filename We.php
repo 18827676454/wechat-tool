@@ -1,16 +1,6 @@
 <?php
 
-// +----------------------------------------------------------------------
-// | WeChatDeveloper
-// +----------------------------------------------------------------------
-// | 版权所有 2014~2018 广州楚才信息科技有限公司 [ http://www.cuci.cc ]
-// +----------------------------------------------------------------------
-// | 官方网站: http://think.ctolog.com
-// +----------------------------------------------------------------------
-// | 开源协议 ( https://mit-license.org )
-// +----------------------------------------------------------------------
-// | github开源项目：https://github.com/zoujingli/WeChatDeveloper
-// +----------------------------------------------------------------------
+
 
 use WeChat\Contracts\DataArray;
 use WeChat\Exceptions\InvalidInstanceException;
@@ -19,7 +9,7 @@ use WeChat\Exceptions\InvalidInstanceException;
  * 加载缓存器
  *
  * Class We
- * @library WeChatDeveloper
+ * @library WeChatTools
  * @author Anyon<zoujingli@qq.com>
  * @date 2018/05/24 13:23
  *
