@@ -1,0 +1,33 @@
+{
+    "type": "library",
+    "name": "randy/wechat-tool",
+    "description": "WeChat platform and WeChat payment development tools",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Randy",
+            "email": "284431745@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-libxml": "*",
+        "ext-openssl": "*",
+        "ext-mbstring": "*",
+        "ext-simplexml": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "We.php"
+        ],
+        "psr-4": {
+            "WePay\\": "WePay",
+            "WeMini\\": "WeMini",
+            "WeChat\\": "WeChat",
+            "AliPay\\": "AliPay"
+        }
+    }
+}
