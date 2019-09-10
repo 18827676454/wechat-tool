@@ -100,4 +100,60 @@ class Script extends BasicWeChat
         foreach ($data as $k => $v) array_push($params, "{$k}={$v}");
         return $method(join('&', $params));
     }
+
+    /**
+     * 获取微信卡券签名
+     * @param string $card_id
+     * @param int    $timestamp
+     * @param string $noncestr
+     * @param string $appid
+     *
+     * @return array|bool
+     * @throws Exceptions\LocalCacheException
+     * @throws InvalidResponseException
+     * @author : Randy_chen
+     * @Date   : 2019/9/10
+     * @Time   : 21:16
+     */
+    public function getCardSign($card_id = '', $timestamp = 0, $noncestr = '', $appid = '')
+    {
+        $api_ticket = $this->getTicket('wx_card');
+        if (!$timestamp)
+            $timestamp = time();
+        if (!$noncestr)
+            $noncestr = Tools::createNoncestr(16);
+        $arrdata = [
+            "api_ticket" => $api_ticket,
+            "card_id"    => $card_id,
+            "timestamp"  => $timestamp,
+            "noncestr"   => $noncestr
+        ];
+        $sign = $this->getTicketSignature($arrdata);
+        if (!$sign)
+            return false;
+        $signPackage = [
+            "card_id"   => $card_id,
+            "nonce_str" => $noncestr,
+            "timestamp" => $timestamp,
+            "signature" => $sign
+        ];
+        return $signPackage;
+    }
+
+    /**
+     * 获取微信卡券签名
+     * @param array $arrdata 签名数组
+     * @param string $method 签名方法
+     * @return boolean|string 签名值
+     */
+    public function getTicketSignature($arrdata, $method = "sha1")
+    {
+        if (!function_exists($method)) return false;
+        $newArray = [];
+        foreach ($arrdata as $key => $value) {
+            array_push($newArray, (string) $value);
+        }
+        sort($newArray, SORT_STRING);
+        return $method(implode($newArray));
+    }
 }
