@@ -378,8 +378,18 @@ class Tools
      */
     public static function setCache($name, $value = '', $expired = 3600)
     {
-        //调整为redis缓存
-        return Cache::set($name ,$value , $expired);
+    	if(function_exists('cache')){
+		    return cache($name ,$value , $expired);
+	    }
+	    if (is_callable(self::$cache_callable['set'])) {
+		    return call_user_func_array(self::$cache_callable['set'], func_get_args());
+	    }
+	    $file = self::_getCacheName($name);
+	    $data = ['name' => $name, 'value' => $value, 'expired' => time() + intval($expired)];
+	    if (!file_put_contents($file, serialize($data))) {
+		    throw new LocalCacheException('local cache error.', '0');
+	    }
+	    return $file;
     }
 
     /**
@@ -389,7 +399,23 @@ class Tools
      */
     public static function getCache($name)
     {
-        return Cache::get($name);
+	    if(function_exists('cache')){
+		    return cache($name);
+	    }
+
+	    if (is_callable(self::$cache_callable['get'])) {
+		    return call_user_func_array(self::$cache_callable['get'], func_get_args());
+	    }
+	    $file = self::_getCacheName($name);
+	    if (file_exists($file) && ($content = file_get_contents($file))) {
+		    $data = unserialize($content);
+		    if (isset($data['expired']) && (intval($data['expired']) === 0 || intval($data['expired']) >= time())) {
+			    return $data['value'];
+		    }
+		    self::delCache($name);
+	    }
+	    return null;
+
     }
 
     /**
@@ -399,7 +425,16 @@ class Tools
      */
     public static function delCache($name)
     {
-        return Cache::rm($name);
+	    if(function_exists('cache')){
+		    return cache($name, NULL);
+	    }
+
+	    if (is_callable(self::$cache_callable['del'])) {
+		    return call_user_func_array(self::$cache_callable['del'], func_get_args());
+	    }
+	    $file = self::_getCacheName($name);
+	    return file_exists($file) ? unlink($file) : true;
+
     }
 
     /**

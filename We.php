@@ -39,6 +39,8 @@ use WeChat\Exceptions\InvalidInstanceException;
  * @method \WeMini\Qrcode WeMiniQrcode($options = []) static 小程序二维码管理
  * @method \WeMini\Template WeMiniTemplate($options = []) static 小程序模板消息支持
  * @method \WeMini\Total WeMiniTotal($options = []) static 小程序数据接口
+ * @method \WeMini\Goods WeMiniGoods($options = []) static 小程序直播商品管理接口
+ * @method \WeMini\Live WeMiniLive($options = []) static 小程序直播管理
  *
  * ----- WePay -----
  * @method \WePay\Bill WePayBill($options = []) static 微信商户账单及评论
