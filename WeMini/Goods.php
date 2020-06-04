@@ -62,7 +62,7 @@ class Goods extends BasicWeChat {
 	public function add($data) {
 		$url = 'https://api.weixin.qq.com/wxaapi/broadcast/goods/add?access_token=ACCESS_TOKEN';
 		$this->registerApi($url, __FUNCTION__, func_get_args());
-		return $this->callPostApi($url, $data, true);
+		return $this->callPostApi($url, $data, true, true);
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Goods extends BasicWeChat {
 	public function delete($data) {
 		$url = 'https://api.weixin.qq.com/wxaapi/broadcast/goods/delete?access_token=ACCESS_TOKEN';
 		$this->registerApi($url, __FUNCTION__, func_get_args());
-		return $this->callPostApi($url, $data, true);
+		return $this->callPostApi($url, $data, true, true);
 	}
 
 	/**
@@ -138,7 +138,7 @@ class Goods extends BasicWeChat {
 	public function update($data) {
 		$url = 'https://api.weixin.qq.com/wxaapi/broadcast/goods/update?access_token=ACCESS_TOKEN';
 		$this->registerApi($url, __FUNCTION__, func_get_args());
-		return $this->callPostApi($url, $data, true);
+		return $this->callPostApi($url, $data, true, true);
 	}
 
 	/**
@@ -157,7 +157,7 @@ class Goods extends BasicWeChat {
 	public function getGoodsWareHouse($data) {
 		$url = 'https://api.weixin.qq.com/wxa/business/getgoodswarehouse?access_token=ACCESS_TOKEN';
 		$this->registerApi($url, __FUNCTION__, func_get_args());
-		return $this->callPostApi($url, $data, true);
+		return $this->callPostApi($url, $data, true, true);
 	}
 
 	/**
@@ -194,6 +194,6 @@ class Goods extends BasicWeChat {
 	public function addGoods($data) {
 		$url = 'https://api.weixin.qq.com/wxaapi/broadcast/room/addgoods?access_token=ACCESS_TOKEN';
 		$this->registerApi($url, __FUNCTION__, func_get_args());
-		return $this->callPostApi($url, $data, true);
+		return $this->callPostApi($url, $data, true, true);
 	}
 }

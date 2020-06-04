@@ -159,10 +159,14 @@ class BasicWeChat
      * @throws InvalidResponseException
      * @throws \WeChat\Exceptions\LocalCacheException
      */
-    protected function httpPostForJson($url, array $data, $buildToJson = true)
+    protected function httpPostForJson($url, array $data, $buildToJson = true, $isHeader = false)
     {
         try {
-            return Tools::json2arr(Tools::post($url, $buildToJson ? Tools::arr2json($data) : $data));
+            $options = [];
+            if($isHeader){
+                $options['headers'][] = 'Content-Type: application/json';
+            }
+            return Tools::json2arr(Tools::post($url, $buildToJson ? Tools::arr2json($data) : $data, $options));
         } catch (InvalidResponseException $e) {
             if (!$this->isTry && in_array($e->getCode(), ['40014', '40001', '41001', '42001'])) {
                 [$this->delAccessToken(), $this->isTry = true];
@@ -199,10 +203,10 @@ class BasicWeChat
      * @throws InvalidResponseException
      * @throws \WeChat\Exceptions\LocalCacheException
      */
-    public function callPostApi($url, array $data, $isBuildJson = true)
+    public function callPostApi($url, array $data, $isBuildJson = true, $isHeader = false)
     {
         $this->registerApi($url, __FUNCTION__, func_get_args());
-        return $this->httpPostForJson($url, $data, $isBuildJson);
+        return $this->httpPostForJson($url, $data, $isBuildJson, $isHeader);
     }
 
     /**

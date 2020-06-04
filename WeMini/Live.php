@@ -101,6 +101,6 @@ class Live extends BasicWeChat {
 	public function create($data) {
 		$url = 'https://api.weixin.qq.com/wxaapi/broadcast/room/create?access_token=ACCESS_TOKEN';
 		$this->registerApi($url, __FUNCTION__, func_get_args());
-		return $this->callPostApi($url, $data, true);
+		return $this->callPostApi($url, $data, true, true);
 	}
 }
