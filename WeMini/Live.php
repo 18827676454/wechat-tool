@@ -36,7 +36,7 @@ class Live extends BasicWeChat {
 	 * @Time   : 13:07
 	 */
 	public function getLiveInfo(int $start = 0, int $limit = 10) {
-		$url = 'http://api.weixin.qq.com/wxa/business/getliveinfo?access_token=ACCESS_TOKEN';
+		$url = 'https://api.weixin.qq.com/wxa/business/getliveinfo?access_token=ACCESS_TOKEN';
 		$data = [
 			'start' => $start,
 			'limit' => $limit
@@ -61,7 +61,7 @@ class Live extends BasicWeChat {
 	 * @Time   : 13:16
 	 */
 	public function getPlayback(int $room_id, int $start, int $limit, string $action = 'get_replay') {
-		$url = 'http://api.weixin.qq.com/wxa/business/getliveinfo?access_token=ACCESS_TOKEN';
+		$url = 'https://api.weixin.qq.com/wxa/business/getliveinfo?access_token=ACCESS_TOKEN';
 		$data = [
 			'action'  => $action,
 			'room_id' => $room_id,
