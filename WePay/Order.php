@@ -29,6 +29,17 @@ class Order extends BasicWePay
     }
 
     /**
+     * 付款码支付
+     * @throws \WeChat\Exceptions\InvalidResponseException
+     * @throws \WeChat\Exceptions\LocalCacheException
+     */
+    public function micropay(array $options)
+    {
+        $url = 'https://api.mch.weixin.qq.com/pay/micropay';
+        return $this->callPostApi($url, $options, false, 'MD5');
+    }
+
+    /**
      * 查询订单
      * @param array $options
      * @return array
